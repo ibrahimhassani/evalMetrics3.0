@@ -1,0 +1,44 @@
+<nav ng-controller="MainCtrl" id="sidebar">
+    <div id="main-menu">
+        <ul class="sidebar-nav">
+            <li>
+                <a href="#/"><i class="glyphicon glyphicon-home"></i><span class="sidebar-text">Accueil</span></a>
+            </li>
+            <li>
+                <a href=""><i class="fa fa-dashboard"></i><span class="sidebar-text">Projets</span>
+                <span class="fa arrow"></span></a>
+                 <!-- <ul class="submenu collapse"> le collapse ne marche pas avec angular routing-->
+                 <ul class="submenu">
+                    <li>
+                        <a href="#/projets"><span class="sidebar-text">Tableau de Bord</span></a>
+                    </li>
+                    <li>
+                        <a href="#/projets/ajout"><span class="sidebar-text">Formulaire d'Ajout</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href=""><i class="glyph-icon flaticon-account"></i><span class="sidebar-text">Account</span><span class="fa arrow">
+                </span></a>
+                  <!-- <ul class="submenu collapse"> le collapse ne marche pas avec angular routing-->
+                 <ul class="submenu">
+                    <li>
+                        <a href="#/profil"><span class="sidebar-text">User Profile</span></a>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="footer-widget">
+        <img src="assets/img/gradient.png" alt="gradient effet" class="sidebar-gradient-img" />
+        <div id="sidebar-charts">
+            
+        <div class="sidebar-footer clearfix">
+            <a class="pull-left" href="#/profil" rel="tooltip" data-placement="top" data-original-title="Settings"><i class="glyph-icon flaticon-settings21"></i></a>
+            <a class="pull-left toggle_fullscreen" href="" rel="tooltip" data-placement="top" data-original-title="Fullscreen"><i class="glyph-icon flaticon-fullscreen3"></i></a>
+            <a class="pull-left" href="lockscreen.html" rel="tooltip" data-placement="top" data-original-title="Lockscreen"><i class="glyph-icon flaticon-padlock23"></i></a>
+            <a class="pull-left" href="login.html" rel="tooltip" data-placement="top" data-original-title="Logout"><i class="fa fa-power-off"></i></a>
+        </div> 
+    </div>
+</nav>

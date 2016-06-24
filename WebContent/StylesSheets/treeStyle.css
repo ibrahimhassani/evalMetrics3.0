@@ -1,0 +1,40 @@
+/* MAIN STYLES */
+
+
+p {
+    margin: 20px 0;
+}
+
+ul {
+    padding-bottom:30px;
+}
+
+/* HEADER */
+
+
+.tittle-dhtmlx {
+    padding: 29px 0 0 121px;
+    font-family:arial, serif;
+    font-size:16px;
+    color:white;
+    float:left;
+    cursor:default;
+}
+
+
+/* CONTENT */
+
+.content {
+    margin: 30px 63px 0 63px;
+}
+
+.content li {
+    list-style:none;
+    height:22px;
+}
+
+.line {
+    margin: 0;
+	padding: 1px;
+    background: url("../img/border-dotted.gif") repeat-x top;
+}

@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<package name="default" extends="struts-default, json-default"
+		namespace="/">
+		<interceptors>
+			<interceptor class="ma.ensao.evalmetrics.interceptors.LoginInterceptor"
+				name="loginInterceptor">
+			</interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+
+
+		<global-results>
+			<result name="login">index.jsp</result>
+			<result name="error">errors/error.jsp</result>
+		</global-results>
+
+
+		<!-- <global-exception-mappings> -->
+		<!-- <exception-mapping exception="java.lang.Exception" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.ArithmeticException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.ArrayIndexOutOfBoundsException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.ArrayStoreException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.ClassCastException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.IllegalArgumentException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.IllegalMonitorStateException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.IllegalStateException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.IllegalThreadStateException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.IndexOutOfBoundsException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.NegativeArraySizeException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.NullPointerException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.NumberFormatException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.SecurityException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.StringIndexOutOfBounds" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.UnsupportedOperationException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.ClassNotFoundException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.CloneNotSupportedException" 
+			result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.IllegalAccessException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.InstantiationException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.InterruptedException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.NoSuchFieldException" result="error"/> -->
+		<!-- <exception-mapping exception="java.lang.NoSuchMethodException" result="error"/> -->
+		<!-- </global-exception-mappings> -->
+
+		<action name="*">
+			<result>/errors/error404.jsp</result>
+		</action>
+
+		<action name="Connect" class="ma.ensao.evalmetrics.view.AdminAction"
+			method="Connect">
+			<result name="ADMIN" type="redirect">admin.action</result>
+			<result name="AUDIT" type="redirect">admin.action</result>
+			<result name="DEVELOPPEUR" type="redirect">admin.action</result>
+			<result name="CLIENT" type="redirect">admin.action</result>
+			<result name="CHEF DE PROJET" type="redirect">admin.action</result>
+			<result name="input" type="redirect">index.jsp</result>
+		</action>
+		
+		<action name="auth" class="ma.ensao.evalmetrics.view.AdminAction"
+			method="Connect">
+			<result name="ADMIN" type="redirect">sessions.action</result>
+			<result name="AUDIT" type="redirect">sessions.action</result>
+			<result name="DEVELOPPEUR" type="redirect">sessions.action</result>
+			<result name="CLIENT" type="redirect">sessions.action</result>
+			<result name="CHEF DE PROJET" type="redirect">sessions.action</result>
+		</action>
+		
+		<action name="sessions">
+			<interceptor-ref name="loginStack" />
+			<result type="json">
+						<param name="root">session</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+		</action>
+		
+		<action name="aPropos">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/aPropos/aPropos.jsp</result>
+		</action>
+		<action name="contact">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/contact/contact.jsp</result>
+		</action>
+		<action name="admin">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/admin/index.jsp</result>
+		</action>
+		<action name="audit">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/audit/index.jsp</result>
+		</action>
+		<action name="developpeur">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/developpeur/index.jsp</result>
+		</action>
+		<action name="client">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/client/index.jsp</result>
+		</action>
+		<action name="chefDeProjet">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/chefDeProjet/index.jsp</result>
+		</action>
+		<action name="addForm">
+			<interceptor-ref name="loginStack" />
+			<result>/WEB-INF/admin/utilisateurs/add.jsp</result>
+		</action>
+		<action name="add" class="ma.ensao.evalmetrics.view.UserValidAction"
+			method="add">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/utilisateurs/add.jsp</result>
+			<result name="input">/WEB-INF/admin/utilisateurs/add.jsp</result>
+		</action>
+
+		<action name="liste" class="ma.ensao.evalmetrics.view.UserAction"
+			method="liste">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/utilisateurs/lister.jsp</result>
+			<result name="input">/WEB-INF/admin/utilisateurs/index.jsp</result>
+		</action>
+		<action name="editer" class="ma.ensao.evalmetrics.view.UserAction"
+			method="liste">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/utilisateurs/editer.jsp</result>
+			<result name="input">/WEB-INF/admin/utilisateurs/index.jsp</result>
+		</action>
+		<action name="getSpecificUser" class="ma.ensao.evalmetrics.view.UserAction"
+			method="getSpecificUser">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/utilisateurs/modifier.jsp</result>
+			<result name="input">/WEB-INF/admin/utilisateurs/test.jsp</result>
+		</action>
+		<action name="modifier" class="ma.ensao.evalmetrics.view.UserValidAction"
+			method="modifier">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="redirect">editer.action</result>
+			<result name="input">/WEB-INF/admin/utilisateurs/test.jsp</result>
+		</action>
+		<action name="delete" class="ma.ensao.evalmetrics.view.UserAction"
+			method="delete">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="redirect">editer.action</result>
+			<result name="input"></result>
+		</action>
+		<action name="logOut" class="ma.ensao.evalmetrics.view.AdminAction"
+			method="logOut">
+			<interceptor-ref name="loginStack" />
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="utilisateurs">
+			<interceptor-ref name="loginStack" />
+			<result type="redirect">liste.action</result>
+		</action>
+		<action name="folder" class="ma.ensao.evalmetrics.util.javaProjects.action"
+			method="listejava">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="json">
+						<param name="root">report</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+		</action>
+		
+		<action name="packages" class="ma.ensao.evalmetrics.util.javaProjects.action"
+			method="listejava">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="json">
+						<param name="root">packages</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+		</action>
+
+		<action name="testerProjet" class="ma.ensao.evalmetrics.util.javaProjects.action"
+			method="Arbo">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/testArbo.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/testArbo.jsp</result>
+		</action>
+		<action name="afficherTest" class="ma.ensao.evalmetrics.util.javaProjects.action"
+			method="afficherTest">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/testArbo.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/testArbo.jsp</result>
+		</action>
+		<action name="afficher"
+			class="ma.ensao.evalmetrics.util.javaProjects.Interpretation" method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/caracteristiques.jsp
+			</result>
+			<result name="input">/WEB-INF/admin/projets/caracteristiques.jsp
+			</result>
+		</action>
+		<action name="testerjava" class="ma.ensao.evalmetrics.util.javaProjects.action"
+			method="testerJava">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/testerJava.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/testerJava.jsp</result>
+		</action>
+
+
+		<action name="del" class="ma.ensao.evalmetrics.view.UserAction"
+			method="del">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="redirect">editer.action</result>
+		</action>
+		<action name="EvalMetrics" class="ma.ensao.evalmetrics.util.javaProjects.action"
+			method="Arbo">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/testerProjet.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/testerProjet.jsp</result>
+		</action>
+		<!-- para -->
+		<action name="getSpecificPara" class="ma.ensao.evalmetrics.view.ParametrageAction"
+			method="getSpecificPara">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/parametrer/modifierCara.jsp
+			</result>
+		</action>
+
+		<action name="modifierPara" class="ma.ensao.evalmetrics.view.ParametrageAction"
+			method="modifierPara">
+			<interceptor-ref name="loginStack" />
+			<result name="ssCara">
+				/WEB-INF/admin/projets/parametrer/modifierSubCara.jsp
+			</result>
+			<result name="metric">
+				/WEB-INF/admin/projets/parametrer/modifierMetric.jsp
+			</result>
+			<result name="propriete">
+				/WEB-INF/admin/projets/parametrer/modifierProp.jsp
+			</result>
+			<result name="success" type="redirect">
+				listerProjetsTab.action
+			</result>
+		</action>
+
+		<!-- /para -->
+		<!-- Projets affectation -->
+		<action name="projets">
+			<interceptor-ref name="loginStack" />
+			<result type="redirect">listerProjetsTab.action</result>
+		</action>
+		<action name="ajouterProjetsTab">
+			<interceptor-ref name="loginStack" />
+			<result type="redirect">affectationProjetsGetUsers.action</result>
+		</action>
+		<action name="affectationProjetsGetUsers" class="ma.ensao.evalmetrics.view.AffectationProjet"
+			method="usersList">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/add.jsp</result>
+		</action>
+		<action name="fileUpload" class="ma.ensao.evalmetrics.view.AffectationProjet"
+			method="fileUpload">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="redirect">ajouterProjetsTab</result>
+			<result name="input">/WEB-INF/admin/projets/add.jsp</result>
+		</action>
+		<action name="listerProjetsTab" class="ma.ensao.evalmetrics.view.AffectationProjet"
+			method="liste">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="json">
+						<param name="root">fileList</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+		</action>
+		<action name="deleteProjet" class="ma.ensao.evalmetrics.view.FileAction"
+			method="delete">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="redirect">editerProjetsTab.action</result>
+		</action>
+		<action name="editerProjetsTab" class="ma.ensao.evalmetrics.view.AffectationProjet"
+			method="liste">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/editerProjet/editer.jsp
+			</result>
+		</action>
+		<action name="getSpecificProjet" class="ma.ensao.evalmetrics.view.AffectationProjet"
+			method="getSpecificProjet">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/editerProjet/modifier.jsp
+			</result>
+		</action>
+		<action name="modifierProjet" class="ma.ensao.evalmetrics.view.AffectationProjet"
+			method="modifier">
+			<interceptor-ref name="loginStack" />
+			<result name="success" type="redirect">editerProjetsTab</result>
+		</action>
+		<!-- Fin Projets affectation -->
+		<action name="metricsExportXls"
+			class="ma.ensao.evalmetrics.view.metrics.export.MetricsExportXls">
+			<interceptor-ref name="loginStack" />
+			<result type="redirect">download.action</result>
+		</action>
+		<action name="download"
+			class="ma.ensao.evalmetrics.view.metrics.export.DownloadAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+		<action name="graphe" class="ma.ensao.evalmetrics.view.graphe"
+			method="execute">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/graphe.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/graphe.jsp</result>
+		</action>
+		<action name="graphe_carac" class="ma.ensao.evalmetrics.view.graphe"
+			method="execute">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/caracteristiques.jsp
+			</result>
+			<result name="input">/WEB-INF/admin/projets/caracteristiques.jsp
+			</result>
+		</action>
+		<action name="graphe_histo" class="ma.ensao.evalmetrics.view.graphe" method="execute">
+			<result name="success">/WEB-INF/admin/projets/graphe_histo.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/graphe_histo.jsp</result>
+		</action>
+		<action name="stats" class="ma.ensao.evalmetrics.view.Stats"
+			method="execute">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/stats.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/stats.jsp</result>
+		</action>
+		<action name="Interpmethod"
+			class="ma.ensao.evalmetrics.interpretation.MethodIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/interpmethod.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/interpmethod.jsp</result>
+		</action>
+		<action name="Interpclass"
+			class="ma.ensao.evalmetrics.interpretation.CLassIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/interpclass.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/interpclass.jsp</result>
+		</action>
+		<action name="pattern" class="ma.ensao.evalmetrics.view.Pattern"
+			method="execute">
+			<interceptor-ref name="loginStack" />
+			<result name="success">/WEB-INF/admin/projets/pattern.jsp</result>
+			<result name="input">/WEB-INF/admin/projets/pattern.jsp</result>
+		</action>
+		<action name="download" class="ma.ensao.evalmetrics.view.Pattern"
+			method="exportXML">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename="Design Patterns.xml"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+
+		<action name="listMethodAction"
+			class="ma.ensao.evalmetrics.interpretation.MethodIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpmethod.jsp</result>
+		</action>
+		<action name="addMethodAction"
+			class="ma.ensao.evalmetrics.interpretation.MethodIntManager"
+			method="ajouter">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpmethod.jsp</result>
+		</action>
+		<action name="updateMethodAction"
+			class="ma.ensao.evalmetrics.interpretation.MethodIntManager"
+			method="update">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpmethod.jsp</result>
+		</action>
+		<action name="deleteMethodAction"
+			class="ma.ensao.evalmetrics.interpretation.MethodIntManager"
+			method="delete">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpmethod.jsp</result>
+		</action>
+
+		<action name="listClassAction"
+			class="ma.ensao.evalmetrics.interpretation.CLassIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpclass.jsp</result>
+		</action>
+
+		<action name="addClassAction"
+			class="ma.ensao.evalmetrics.interpretation.CLassIntManager"
+			method="ajouter">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpclass.jsp</result>
+		</action>
+		<action name="updateClassAction"
+			class="ma.ensao.evalmetrics.interpretation.CLassIntManager"
+			method="update">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpclass.jsp</result>
+		</action>
+		<action name="deleteClassAction"
+			class="ma.ensao.evalmetrics.interpretation.CLassIntManager"
+			method="delete">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/interpclass.jsp</result>
+		</action>
+
+		<action name="listCaracAction"
+			class="ma.ensao.evalmetrics.interpretation.CaracIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/caracteristique.jsp
+			</result>
+		</action>
+		<action name="deleteCaracAction"
+			class="ma.ensao.evalmetrics.interpretation.CaracIntManager"
+			method="delete">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/caracteristique.jsp
+			</result>
+		</action>
+
+		<action name="listSubAction"
+			class="ma.ensao.evalmetrics.interpretation.SubcaracIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/caracteristique.jsp
+			</result>
+		</action>
+
+		<action name="listPropAction"
+			class="ma.ensao.evalmetrics.interpretation.ProprieteIntManager"
+			method="afficher">
+			<interceptor-ref name="loginStack" />
+			<result type="json">/WEB-INF/admin/projets/caracteristique.jsp
+			</result>
+		</action>
+
+	</package>
+	<package name="eval" namespace="/" extends="jfreechart-default">
+
+		<action name="graphe_fct" class="ma.ensao.evalmetrics.view.graphe_fct"
+			method="execute">
+			<result name="success" type="chart">
+				<param name="width">1000</param>
+				<param name="height">370</param>
+			</result>
+		</action>
+		<action name="caracteristiques" class="ma.ensao.evalmetrics.view.graphe_fct"
+			method="caracteristiques">
+			<result name="success" type="chart">
+				<param name="width">1000</param>
+				<param name="height">350</param>
+			</result>
+		</action>
+		<action name="caract_heritage" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="heritage">
+			<result name="success" type="chart">
+				<param name="width">350</param>
+				<param name="height">230</param>
+			</result>
+		</action>
+		<action name="caract_complex" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="complex">
+			<result name="success" type="chart">
+				<param name="width">350</param>
+				<param name="height">230</param>
+			</result>
+		</action>
+		<action name="caract_encap" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="encapsulation">
+			<result name="success" type="chart">
+				<param name="width">350</param>
+				<param name="height">230</param>
+			</result>
+		</action>
+		<action name="caract_coupl" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="coupling">
+			<result name="success" type="chart">
+				<param name="width">700</param>
+				<param name="height">350</param>
+			</result>
+		</action>
+		
+		<action name="abstr" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="abstraction">
+			<result name="success" type="chart">
+				<param name="width">350</param>
+				<param name="height">350</param>
+			</result>
+		</action>
+		
+		<action name="size" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="size">
+			<result name="success" type="chart">
+				<param name="width">1000</param>
+				<param name="height">350</param>
+			</result>
+		</action>
+
+		<action name="Histo_heritage" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="heritage">
+			<result name="success" type="chart">
+				<param name="width">350</param>
+				<param name="height">230</param>
+			</result>
+		</action>
+		<action name="lines" class="ma.ensao.evalmetrics.view.Stats"
+			method="lines">
+			<result name="success" type="chart">
+				<param name="width">450</param>
+				<param name="height">270</param>
+			</result>
+		</action>
+		<action name="methods" class="ma.ensao.evalmetrics.view.Stats"
+			method="methods">
+			<result name="success" type="chart">
+				<param name="width">450</param>
+				<param name="height">270</param>
+			</result>
+		</action>
+		<action name="generalMC" class="ma.ensao.evalmetrics.view.Stats"
+			method="generalMC">
+			<result name="success" type="chart">
+				<param name="width">600</param>
+				<param name="height">450</param>
+			</result>
+		</action>
+		<action name="generalAF" class="ma.ensao.evalmetrics.view.Stats"
+			method="generalAF">
+			<result name="success" type="chart">
+				<param name="width">600</param>
+				<param name="height">450</param>
+			</result>
+		</action>
+	</package>
+</struts>
