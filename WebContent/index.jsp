@@ -37,9 +37,7 @@
                         <img src="assets/img/account/user-icon.png" alt="Key icon">
                     </div>
                     <div class="login-logo">
-                        <a href="#?login-theme-3">
-                            <img src="assets/img/account/login-logo.png" alt="Company Logo">
-                        </a>
+                            <img width="300" src="Images/header_menu_logo.png" alt="Company Logo">
                     </div>
                     <hr>
                     <div class="login-form">
@@ -55,21 +53,10 @@
 									    <s:password name="admin.password" size="100" cssClass="input-field form-control password" placeholder="password"/>
 									    <s:submit key="label.login" cssClass="btn btn-login"/>
 							</s:form>
-                        <div class="login-links">
-                            <a href="password_forgot.html">Forgot password?</a>
-                            <br>
-                            <a href="signup.html">Don't have an account? <strong>Sign Up</strong></a>
-                        </div>
+                        
                     </div>
                 </div>
-                <div class="social-login row">
-                    <div class="fb-login col-lg-6 col-md-12 animated flipInX">
-                        <a href="#" class="btn btn-facebook btn-block">Connect with <strong>Facebook</strong></a>
-                    </div>
-                    <div class="twit-login col-lg-6 col-md-12 animated flipInX">
-                        <a href="#" class="btn btn-twitter btn-block">Connect with <strong>Twitter</strong></a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

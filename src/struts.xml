@@ -196,8 +196,16 @@
 		<action name="testerProjet" class="ma.ensao.evalmetrics.util.javaProjects.action"
 			method="Arbo">
 			<interceptor-ref name="loginStack" />
-			<result name="success">/WEB-INF/admin/projets/testArbo.jsp</result>
-			<result name="input">/WEB-INF/admin/projets/testArbo.jsp</result>
+			<result name="success" type="json">
+						<param name="root">carac</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+        	<result name="input" type="json">
+						<param name="root">carac</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
 		</action>
 		<action name="afficherTest" class="ma.ensao.evalmetrics.util.javaProjects.action"
 			method="afficherTest">
@@ -269,8 +277,11 @@
 		</action>
 		<action name="affectationProjetsGetUsers" class="ma.ensao.evalmetrics.view.AffectationProjet"
 			method="usersList">
-			<interceptor-ref name="loginStack" />
-			<result name="success">/WEB-INF/admin/projets/add.jsp</result>
+			<result name="success" type="json">
+						<param name="root">users</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
 		</action>
 		<action name="fileUpload" class="ma.ensao.evalmetrics.view.AffectationProjet"
 			method="fileUpload">
@@ -339,14 +350,30 @@
 			</result>
 		</action>
 		<action name="graphe_histo" class="ma.ensao.evalmetrics.view.graphe" method="execute">
-			<result name="success">/WEB-INF/admin/projets/graphe_histo.jsp</result>
-			<result name="input">/WEB-INF/admin/projets/graphe_histo.jsp</result>
+			<result name="success" type="json">
+						<param name="root">result</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+        	<result name="input" type="json">
+						<param name="root">result</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
 		</action>
 		<action name="stats" class="ma.ensao.evalmetrics.view.Stats"
 			method="execute">
 			<interceptor-ref name="loginStack" />
-			<result name="success">/WEB-INF/admin/projets/stats.jsp</result>
-			<result name="input">/WEB-INF/admin/projets/stats.jsp</result>
+			<result name="success" type="json">
+						<param name="root">oldResult</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+        	<result name="input" type="json">
+						<param name="root">oldResult</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
 		</action>
 		<action name="Interpmethod"
 			class="ma.ensao.evalmetrics.interpretation.MethodIntManager"
@@ -460,6 +487,33 @@
 			<result type="json">/WEB-INF/admin/projets/caracteristique.jsp
 			</result>
 		</action>
+		
+		<action name="heritage" class="ma.ensao.evalmetrics.view.ProprieteGraphe"
+			method="heritage">
+			<result name="success" type="json">
+        				<param name="root">liste</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        			</result>
+		</action>
+		<action name="methodes" class="ma.ensao.evalmetrics.view.Stats"
+			method="methods">
+			<result name="success" type="json">
+        				<param name="root">stat</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+		</action>
+		
+		<action name="oldmethodes" class="ma.ensao.evalmetrics.view.Stats"
+			method="methods">
+			<result name="success" type="json">
+        				<param name="root">oldStat</param>
+        				<param name="excludeNULLProperties">true</param>
+        				<param name="noCache">true</param>
+        	</result>
+		</action>
+		
 
 	</package>
 	<package name="eval" namespace="/" extends="jfreechart-default">

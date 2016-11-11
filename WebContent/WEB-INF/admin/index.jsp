@@ -11,6 +11,8 @@
 
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/Chart.js"></script>
+	<script src="Scripts/angular-chart.js"></script>
     <script src="Scripts/app.js"></script>
 
     <!-- BEGIN META SECTION -->
@@ -58,6 +60,18 @@
     <script src="assets/plugins/breakpoints/breakpoints.js"></script>
     <script src="assets/plugins/numerator/jquery-numerator.js"></script>
     <!-- END MANDATORY SCRIPTS -->
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script src="assets/plugins/visible/jquery.visible.js"></script>
+    <script src="assets/plugins/charts-d3/d3.v3.js"></script>
+    <script src="assets/plugins/charts-d3/nv.d3.js"></script>
+    <script src="assets/plugins/charts-flot/jquery.flot.js"></script>
+    <script src="assets/plugins/charts-flot/jquery.flot.animator.min.js"></script>
+    <script src="assets/plugins/charts-flot/jquery.flot.resize.js"></script>
+    <script src="assets/plugins/charts-circliful/js/jquery.circliful.min.js"></script>
+    <script src="assets/plugins/charts-morris/raphael.min.js"></script>
+    <script src="assets/plugins/charts-morris/morris.min.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <!-- END  PAGE LEVEL SCRIPTS -->
     <script src="assets/js/application.js"></script>
     
 </body>

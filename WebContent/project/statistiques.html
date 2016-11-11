@@ -1,0 +1,99 @@
+<div >
+            <div class="row">
+                  <div class="col-lg-8 col-md-8">
+                    <div class="panel bd-0">
+                        <div class="panel-heading no-bd bg-dark">
+                            <h3 class="panel-title">Nombres de lignes</h3>
+                        </div>
+                        
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <div >
+									<canvas id="doughnut" class="chart chart-doughnut" 
+									chart-data="data" chart-labels="labels">
+									</canvas> 
+								</div>  
+                                </div>
+                                <div class="col-md-12">
+                                  <h3>Nombre de lignes total   : {{result.LOC+result.CLOC}} (
+                                  	<img ng-if="(result.LOC+result.CLOC)-(oldResult.LOC+oldResult.CLOC) <0" ng-src="./Images/down.png">
+                                  	<img ng-if="(result.LOC+result.CLOC)-(oldResult.LOC+oldResult.CLOC) >0" ng-src="./Images/up.png">
+                                  	<img ng-if="(result.LOC+result.CLOC)-(oldResult.LOC+oldResult.CLOC)==0" ng-src="./Images/eq.png">
+                                  {{(result.LOC+result.CLOC)-(oldResult.LOC+oldResult.CLOC)}})
+                                  </h3>
+                                  <h3>Nombre de lignes Codes   : {{result.LOC}} (
+                                  	<img ng-if="result.LOC-oldResult.LOC <0" ng-src="./Images/down.png">
+                                  	<img ng-if="result.LOC-oldResult.LOC >0" ng-src="./Images/up.png">
+                                  	<img ng-if="result.LOC-oldResult.LOC ==0" ng-src="./Images/eq.png">
+                                  {{result.LOC-oldResult.LOC}})
+                                  </h3>
+                                  <h3>Nombre de lignes Commentaires   : {{result.CLOC}} (
+                                  	<img ng-if="result.CLOC-oldResult.CLOC <0" ng-src="./Images/down.png">
+                                  	<img ng-if="result.CLOC-oldResult.CLOC >0" ng-src="./Images/up.png">
+                                  	<img ng-if="result.CLOC-oldResult.CLOC==0" ng-src="./Images/eq.png">
+                                  {{result.CLOC-oldResult.CLOC}})
+                                  </h3> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                  <div class="col-lg-8 col-md-8">
+                    <div class="panel bd-0">
+                        <div class="panel-heading no-bd bg-dark">
+                            <h3 class="panel-title">Methodes</h3>
+                        </div>
+                        
+                        
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <div >
+									<canvas id="doughnut" class="chart chart-doughnut" 
+									chart-data="dataStat" chart-labels="labelsStat">
+									</canvas> 
+								</div>  
+                                </div>
+                                <div class="col-md-12">
+                                  <h3>Nombre de methodes statiques   : {{stat.nbMSF}} (
+                                  	<img ng-if="stat.nbMSF-oldStat.nbMSF <0" ng-src="./Images/down.png">
+                                  	<img ng-if="stat.nbMSF-oldStat.nbMSF >0" ng-src="./Images/up.png">
+                                  	<img ng-if="stat.nbMSF-oldStat.nbMSF==0" ng-src="./Images/eq.png">
+                                  {{stat.nbMSF-oldStat.nbMSF}})
+                                  </h3>
+                                  <h3>Nombre de methodes publiques   : {{stat.nbNPM}} (
+                                  	<img ng-if="stat.nbNPM-oldStat.nbNPM <0" ng-src="./Images/down.png">
+                                  	<img ng-if="stat.nbNPM-oldStat.nbNPM >0" ng-src="./Images/up.png">
+                                  	<img ng-if="stat.nbNPM-oldStat.nbNPM==0" ng-src="./Images/eq.png">
+                                  {{stat.nbNPM-oldStat.nbNPM}})
+                                  </h3>
+                                  <h3>Nombre de methodes privees   : {{stat.nbMHF}} (
+                                  	<img ng-if="stat.nbMHF-oldStat.nbMHF <0" ng-src="./Images/down.png">
+                                  	<img ng-if="stat.nbMHF-oldStat.nbMHF >0" ng-src="./Images/up.png">
+                                  	<img ng-if="stat.nbMHF-oldStat.nbMHF ==0" ng-src="./Images/eq.png">
+                                  {{stat.nbMHF-oldStat.nbMHF}})
+                                  </h3> 
+                                  <h3>Nombre de methodes protegees   : {{stat.nbMPF}} (
+                                  	<img ng-if="stat.nbMPF-oldStat.nbMPF <0" ng-src="./Images/down.png">
+                                  	<img ng-if="stat.nbMPF-oldStat.nbMPF >0" ng-src="./Images/up.png">
+                                  	<img ng-if="stat.nbMPF-oldStat.nbMPF==0" ng-src="./Images/eq.png">
+                                  {{stat.nbMPF-oldStat.nbMPF}})
+                                  </h3> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            
+        <!-- END MAIN CONTENT -->
+    </div>
